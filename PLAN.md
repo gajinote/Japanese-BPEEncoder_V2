@@ -166,32 +166,32 @@ ids = tokenizer.encode("テキスト", bpe_dropout_rate=0.1)
 ## 実装ステップ
 
 ### Phase 1: クラス骨格と初期化
-- [ ] `PreTrainedTokenizer` 継承・`vocab_files_names` 定義
-- [ ] `__init__`: 語彙・絵文字読み込み、`swe` 辞書・正規表現構築
-- [ ] `vocab_size` property / `get_vocab()` 実装
+- [x] `PreTrainedTokenizer` 継承・`vocab_files_names` 定義
+- [x] `__init__`: 語彙・絵文字読み込み、`swe` 辞書・正規表現構築
+- [x] `vocab_size` property / `get_vocab()` 実装
 
 ### Phase 2: コアメソッド
-- [ ] `_tokenize(text)` — BPE マッチング（ウィンドウ汎用化済み）、文字列返却
-- [ ] `_convert_token_to_id` / `_convert_id_to_token`
-- [ ] `convert_tokens_to_string(tokens)` — バイト列復元を含むデコード
+- [x] `_tokenize(text)` — BPE マッチング（ウィンドウ汎用化済み）、文字列返却
+- [x] `_convert_token_to_id` / `_convert_id_to_token`
+- [x] `convert_tokens_to_string(tokens)` — バイト列復元を含むデコード
 
 ### Phase 3: 保存・後方互換
-- [ ] `save_vocabulary(save_directory, filename_prefix)` 実装
-- [ ] `encode(text, clean=False, bpe_dropout_rate=0.0)` — 後方互換
-- [ ] `decode(tokens, breakline='\n')` — 後方互換
-- [ ] `clean_text(content)` — 移植
+- [x] `save_vocabulary(save_directory, filename_prefix)` 実装
+- [x] `encode(text, clean=False, bpe_dropout_rate=0.0)` — 後方互換
+- [x] `decode(tokens, breakline='\n')` — 後方互換
+- [x] `clean_text(content)` — 移植
 
 ### Phase 4: 検証
-- [ ] `SWEEncoder_ja` との出力比較（`bpe_dropout_rate=0.0` 時に一致するか）
-- [ ] `transformers` 統合テスト（`__call__` / `save_pretrained` / `from_pretrained`）
-- [ ] 英語テキストのトークン化確認
+- [x] `SWEEncoder_ja` との出力比較（`bpe_dropout_rate=0.0` 時に一致するか）
+- [x] `transformers` 統合テスト（`__call__` / `save_pretrained` / `from_pretrained`）
+- [x] 英語テキストのトークン化確認
 
 ### Phase 5: 語彙学習（`SWETrainer`）— オプション
-- [ ] BPE 学習アルゴリズム実装（文字ペア頻度集計 → 逐次マージ）
-- [ ] 固定語彙ブロックの処理（特殊トークン・バイトトークンを先に確保）
-- [ ] `train(files, output_vocab)` — ファイルリストから語彙を学習
-- [ ] `train_from_iterator(texts, output_vocab)` — イテレータ版
-- [ ] 出力フォーマット検証（既存 `.txt` と互換性があるか）
+- [x] BPE 学習アルゴリズム実装（文字ペア頻度集計 → 逐次マージ）
+- [x] 固定語彙ブロックの処理（特殊トークン・バイトトークンを先に確保）
+- [x] `train(files, output_vocab)` — ファイルリストから語彙を学習
+- [x] `train_from_iterator(texts, output_vocab)` — イテレータ版
+- [x] 出力フォーマット検証（既存 `.txt` と互換性があるか）
 
 ---
 
