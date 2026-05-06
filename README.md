@@ -2,6 +2,8 @@
 
 日本語・英語テキスト（UTF-8）のSubWord Encoder / Tokenizerです。  
 文字ペア単位で分かち書きし、整数列にエンコードします。
+[tanreinama/Japanese-BPEEncoder_V2](https://github.com/tanreinama/Japanese-BPEEncoder_V2) からForkし、SWETokenizerを追加しました。
+
 
 - **`encode_swe.py`** — オリジナルの日本語専用エンコーダー (`SWEEncoder_ja`)
 - **`tokenizer_swe.py`** — HuggingFace `transformers` 互換トークナイザー (`SWETokenizer`) ＋ 語彙学習クラス (`SWETrainer`)
