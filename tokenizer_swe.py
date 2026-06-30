@@ -291,13 +291,18 @@ class SWETokenizer(PreTrainedTokenizer):
           else:
             kouho.append((swe[wd], e))
       if kouho:
-        s = sorted(kouho, key=lambda x: x[0])
-        wp, e = s[0]
-        if len(s) > 1 and bpe_dropout_rate > 0.0:
+        # kouho is collected longest-match first. Prefer the longest token so
+        # that compound words are used even when a shorter prefix has a smaller
+        # (more frequent) id. Each end position yields a unique substring, so
+        # the longest match is unambiguous and needs no id tie-break.
+        wp, e = kouho[0]
+        if len(kouho) > 1 and bpe_dropout_rate > 0.0:
           if np.random.random() > bpe_dropout_rate:
-            p = np.exp(np.arange(len(s) - 1))[::-1]
+            # Subword regularization: sometimes fall back to a shorter split,
+            # weighted toward the longer candidates.
+            p = np.exp(np.arange(len(kouho) - 1))[::-1]
             p /= p.sum()
-            wp, e = s[np.random.choice(np.arange(len(s) - 1) + 1, p=p)]
+            wp, e = kouho[np.random.choice(np.arange(len(kouho) - 1) + 1, p=p)]
         result.append(self._convert_id_to_token(wp))
         pos = e
       else:
